@@ -1,7 +1,42 @@
-<script setup></script>
+<script>
+import axios from 'axios';
+import AppHeader from './components/AppHeader.vue';
+import AppMain from './components/AppMain.vue';
+
+export default {
+  name: 'BoolFolio',
+  data() {
+    return {
+      projects: [],
+    };
+  },
+
+  components: {
+    AppHeader,
+    AppMain,
+  },
+  methods: {
+    getProject() {
+      axios
+        .get('http://127.0.0.1:8000/api/test')
+        .then((response) => {
+          console.log(response);
+          this.projects = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  created() {
+    this.getProject();
+  },
+};
+</script>
 
 <template>
-  <h1 class="bg-dark text-white">hello</h1>
+  <AppHeader></AppHeader>
+  <AppMain :projects="projects"></AppMain>
 </template>
 
 <style scoped></style>
