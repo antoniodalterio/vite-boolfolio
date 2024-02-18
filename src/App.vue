@@ -37,6 +37,7 @@ export default {
 <template>
   <AppHeader></AppHeader>
   <AppMain :projects="projects"></AppMain>
+  <router-view></router-view>
 </template>
 
 <style scoped></style>
